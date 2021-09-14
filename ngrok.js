@@ -1,1 +1,0 @@
-export default ngrok = "https://4702-122-179-62-45.ngrok.io"

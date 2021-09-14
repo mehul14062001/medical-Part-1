@@ -5,7 +5,6 @@ import Contants from 'expo-constants';
 import AddPatient from './screens/AddPatient';
 import Home from './screens/Home';
 import Report from './screens/Report';
-import Symptoms from './screens/Symptoms';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer, initState } from './reducers/reducer'
@@ -27,7 +26,6 @@ function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="AddPatient" component={AddPatient} options={{ title: "Patient" }} />
         <Stack.Screen name="Report" component={Report} options={{ title: "" }} />
-        <Stack.Screen name="Symptoms" component={Symptoms} options={{ title: "Symptoms" }} />
       </Stack.Navigator>
     </View>
   );

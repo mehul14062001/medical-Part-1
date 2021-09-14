@@ -2,13 +2,63 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Linking, Alert } from 'react-native';
 import { Title, Card, Button } from 'react-native-paper';
-import { ngrok } from '../ngrok'
 
 const Report = (props) => {
 
-    const { _id, name, phone, email, address, age, gender } = props.route.params.item
+    const { _id, name, phone, email, address, age, gender,
+
+
+        runningnose,
+        sneeze,
+        cough,
+        wheeze,
+        headache,
+        itch,
+        swell,
+        redrashes,
+        familyhistory,
+
+        banana,
+        mango,
+        fruit1,
+        fruit2,
+        lime,
+
+        avaraikai,
+        beans,
+        beetroot,
+        brinjal,
+        cabbage,
+        capsicum,
+        cauliflower,
+        carrot,
+        chowchow,
+        corn,
+        cucumber,
+        drumstick,
+        greens,
+        gourds,
+        kovaikai,
+        kothavarai,
+        lfinger,
+        malli,
+        mushroom,
+        nuckol,
+        onion,
+        peas,
+        potroot,
+        potato,
+        pumkin,
+        pudina,
+        radish,
+        tomato,
+        tondaikai,
+        vazpoo,
+        yams,
+
+    } = props.route.params.item
     const deletePatient = () => {
-        fetch("https://4702-122-179-62-45.ngrok.io/delete", {
+        fetch("http://af52-171-61-77-177.ngrok.io/delete", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -35,6 +85,7 @@ const Report = (props) => {
         }
 
     }
+
     return (
         <ScrollView>
             <View style={{ alignItems: "center" }}>
@@ -81,7 +132,7 @@ const Report = (props) => {
                 <Card style={styles.mycard}>
                     <View style={styles.cardContent}>
                         <Text>
-                            Age: {gender}
+                            Gender: {gender}
                         </Text>
                     </View>
                 </Card>
@@ -91,7 +142,55 @@ const Report = (props) => {
                     PDF
                 </Button>
                 <Button style={{ backgroundColor: "cyan", margin: 10 }} onPress={() => {
-                    props.navigation.navigate("AddPatient", { _id, name, phone, email, address, age, gender })
+                    props.navigation.navigate("AddPatient", {
+                        _id, name, phone, email, address, age, gender, runningnose,
+                        sneeze,
+                        cough,
+                        wheeze,
+                        headache,
+                        itch,
+                        swell,
+                        redrashes,
+                        familyhistory,
+
+                        banana,
+                        mango,
+                        fruit1,
+                        fruit2,
+                        lime,
+
+                        avaraikai,
+                        beans,
+                        beetroot,
+                        brinjal,
+                        cabbage,
+                        capsicum,
+                        cauliflower,
+                        carrot,
+                        chowchow,
+                        corn,
+                        cucumber,
+                        drumstick,
+                        greens,
+                        gourds,
+                        kovaikai,
+                        kothavarai,
+                        lfinger,
+                        malli,
+                        mushroom,
+                        nuckol,
+                        onion,
+                        peas,
+                        potroot,
+                        potato,
+                        pumkin,
+                        pudina,
+                        radish,
+                        tomato,
+                        tondaikai,
+                        vazpoo,
+                        yams,
+                    })
                 }}>
                     Edit
                 </Button>
