@@ -2,63 +2,38 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, Linking, Alert } from 'react-native';
 import { Title, Card, Button } from 'react-native-paper';
+import * as OpenAnything from 'react-native-openanything';
+
 
 const Report = (props) => {
 
-    const { _id, name, phone, email, address, age, gender,
-
-
-        runningnose,
-        sneeze,
-        cough,
-        wheeze,
-        headache,
-        itch,
-        swell,
-        redrashes,
-        familyhistory,
-
-        banana,
-        mango,
-        fruit1,
-        fruit2,
-        lime,
-
-        avaraikai,
-        beans,
-        beetroot,
-        brinjal,
-        cabbage,
-        capsicum,
-        cauliflower,
-        carrot,
-        chowchow,
-        corn,
-        cucumber,
-        drumstick,
-        greens,
-        gourds,
-        kovaikai,
-        kothavarai,
-        lfinger,
-        malli,
-        mushroom,
-        nuckol,
-        onion,
-        peas,
-        potroot,
-        potato,
-        pumkin,
-        pudina,
-        radish,
-        tomato,
-        tondaikai,
-        vazpoo,
-        yams,
+    const { _id, name, phone, email, address, age, gender, runningnose, sneeze, cough, wheeze, headache, itch, swell, redrashes, familyhistory, banana, mango, fruit1, fruit2, lime, avaraikai, beans, beetroot, brinjal, cabbage, capsicum, cauliflower, carrot, chowchow, corn, cucumber, drumstick, greens, gourds, kovaikai, kothavarai, lfinger, malli, mushroom, nuckol, onion, peas, potroot, potato, pumkin, pudina, radish, tomato, tondaikai, vazpoo, yams,
 
     } = props.route.params.item
+
+    const downloadPatient = () => {
+        fetch("http://20ef-122-167-192-211.ngrok.io/download", {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: _id
+            })
+        })
+            .then(res => res.json())
+            .then(downloadingUser => {
+                Alert.alert(`${downloadingUser.name}, Report generated`, "OK")
+                props.navigation.navigate("Home")
+            })
+            .catch(err => {
+                Alert.alert("PDF not generating")
+            })
+    }
+
+
     const deletePatient = () => {
-        fetch("http://af52-171-61-77-177.ngrok.io/delete", {
+        fetch("http://20ef-122-167-192-211.ngrok.io/delete", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -138,64 +113,15 @@ const Report = (props) => {
                 </Card>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-                <Button style={{ backgroundColor: "orange", margin: 10 }} onPress={() => console.log('Hello')}>
-                    PDF
+                <Button style={{ backgroundColor: "orange", margin: 10 }} onPress={() => downloadPatient()}>
+                    Generate and Mail PDF
                 </Button>
                 <Button style={{ backgroundColor: "cyan", margin: 10 }} onPress={() => {
                     props.navigation.navigate("AddPatient", {
-                        _id, name, phone, email, address, age, gender, runningnose,
-                        sneeze,
-                        cough,
-                        wheeze,
-                        headache,
-                        itch,
-                        swell,
-                        redrashes,
-                        familyhistory,
-
-                        banana,
-                        mango,
-                        fruit1,
-                        fruit2,
-                        lime,
-
-                        avaraikai,
-                        beans,
-                        beetroot,
-                        brinjal,
-                        cabbage,
-                        capsicum,
-                        cauliflower,
-                        carrot,
-                        chowchow,
-                        corn,
-                        cucumber,
-                        drumstick,
-                        greens,
-                        gourds,
-                        kovaikai,
-                        kothavarai,
-                        lfinger,
-                        malli,
-                        mushroom,
-                        nuckol,
-                        onion,
-                        peas,
-                        potroot,
-                        potato,
-                        pumkin,
-                        pudina,
-                        radish,
-                        tomato,
-                        tondaikai,
-                        vazpoo,
-                        yams,
+                        _id, name, phone, email, address, age, gender, runningnose, sneeze, cough, wheeze, headache, itch, swell, redrashes, familyhistory, banana, mango, fruit1, fruit2, lime, avaraikai, beans, beetroot, brinjal, cabbage, capsicum, cauliflower, carrot, chowchow, corn, cucumber, drumstick, greens, gourds, kovaikai, kothavarai, lfinger, malli, mushroom, nuckol, onion, peas, potroot, potato, pumkin, pudina, radish, tomato, tondaikai, vazpoo, yams,
                     })
                 }}>
                     Edit
-                </Button>
-                <Button style={{ backgroundColor: "yellow", margin: 10 }} onPress={() => console.log('Hello')}>
-                    Email
                 </Button>
             </View>
             <View>

@@ -3,12 +3,13 @@ import { StyleSheet, Text, View, FlatList, ActivityIndicator, Alert } from 'reac
 import { Card, FAB } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux'
 import { context } from '../App'
+
 const Home = ({ navigation, route }) => {
 
     const { state, dispatch } = useContext(context)
     const { data, loading } = state
     const fetchData = () => {
-        fetch("http://af52-171-61-77-177.ngrok.io")
+        fetch("http://20ef-122-167-192-211.ngrok.io")
             .then(res => res.json())
             .then(results => {
                 dispatch({ type: "ADD_DATA", payload: results })

@@ -130,7 +130,7 @@ const AddPatient = ({ navigation, route }) => {
     const [selectedYams, setSelectedYams] = useState(getDetails("yams"))
 
     const submitData = () => {
-        fetch("http://af52-171-61-77-177.ngrok.io/create", {
+        fetch("http://20ef-122-167-192-211.ngrok.io/create", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -204,7 +204,7 @@ const AddPatient = ({ navigation, route }) => {
     }
 
     const updateData = () => {
-        fetch("http://af52-171-61-77-177.ngrok.io/update", {
+        fetch("http://20ef-122-167-192-211.ngrok.io/update", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'

@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
     })
 })
 
+
 app.post('/create', (req, res) => {
     const patient = new Patient({
         name: req.body.name,
@@ -95,6 +96,51 @@ app.post('/create', (req, res) => {
         })
 })
 
+
+app.post('/download', (req, res) => {
+    Patient.findById(req.body.id)
+        .then(data => {
+            const pdfDocument = require('pdfkit')
+            const fs = require('fs')
+            const doc = new pdfDocument();
+            doc.pipe(fs.createWriteStream(`../downloads/${data.name}_${data._id}.pdf`))
+            { data ? doc.fontSize(10).text(data, 100, 120) : doc.fontSize(10).text("", 100, 100) }
+            doc.end()
+            res.download(`../downloads/${data.name}_${data._id}.pdf`)
+            var nodemailer = require('nodemailer')
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'clinicbphc864@gmail.com',
+                    pass: '12345bphc'
+                }
+            })
+            var mailoptions = {
+                from: 'clinicbphc864@gmail.com',
+                to: `${data.email}`,
+                subject: 'Sending Email',
+                text: `PDF file of
+                Report`,
+                attachments: [{
+                    filename: `${data.name}_${data._id}.pdf`,
+                    path: `../downloads/${data.name}_${data._id}.pdf`
+                }]
+
+            }
+
+            transporter.sendMail(mailoptions, function (error, info) {
+                if (error) {
+                    console.log(error)
+                }
+                else {
+                    console.log("Cool" + info.response)
+                }
+            })
+            res.send(data)
+        }).catch((err) => {
+            console.log(err)
+        })
+})
 
 app.post('/update', (req, res) => {
     Patient.findByIdAndUpdate(req.body.id, {
